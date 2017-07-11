@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/blog-backend/blog-backend.iml" filepath="$PROJECT_DIR$/blog-backend/blog-backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/blog-core/blog-core.iml" filepath="$PROJECT_DIR$/blog-core/blog-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/blog-frontend/blog-frontend.iml" filepath="$PROJECT_DIR$/blog-frontend/blog-frontend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
     </modules>
   </component>
 </project>

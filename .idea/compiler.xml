@@ -9,12 +9,14 @@
         <module name="blog-backend" />
         <module name="blog-core" />
         <module name="blog-frontend" />
+        <module name="eureka-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="blog-backend" target="1.8" />
       <module name="blog-core" target="1.8" />
       <module name="blog-frontend" target="1.8" />
+      <module name="eureka-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
