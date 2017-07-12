@@ -4,8 +4,6 @@
  * 				数据表格对象，可重新设置参数或其他操作
  * */
 ;(function( $ ) {
-// define(['jquery'], function($){
-// 	$.fn.dataTable.ext.errMode = 'none'; // 上线时启用
     $.fn.dataTable.ext.errMode = function (s, h, m) {
         if (h == 1) {
             alert("连接服务器失败！");
@@ -224,5 +222,4 @@
 		
 		return dataTable;
 	}
-// });
 })(jQuery);

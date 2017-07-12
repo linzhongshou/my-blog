@@ -36,14 +36,14 @@ public class LoginController {
         if(account == null || password == null
                 || "".equals(account) || "".equals(password)) {
             result = new ProcessResult(ProcessResult.ERROR, "账号或密码不能为空！");
-        }
-
-        User user = userService.findUserByAccountAndPassword(account, password);
-        if(user == null) {
-            result = new ProcessResult(ProcessResult.ERROR, "账号或密码错误！");
         } else {
-            request.getSession(true).setAttribute("user", user);
-            result = new ProcessResult(ProcessResult.SUCCESS, "验证成功！");
+            User user = userService.findUserByAccountAndPassword(account, password);
+            if(user == null) {
+                result = new ProcessResult(ProcessResult.ERROR, "账号或密码错误！");
+            } else {
+                request.getSession(true).setAttribute("user", user);
+                result = new ProcessResult(ProcessResult.SUCCESS, "验证成功！");
+            }
         }
 
         return result;
