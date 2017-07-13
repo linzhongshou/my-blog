@@ -16,4 +16,10 @@ public interface IArticleService {
     @RequestMapping(value = "/article/findPage")
     List<Article> findPage(@RequestParam(name = "pageNum", defaultValue = "0") Integer pageNum,
                            @RequestParam(name = "pageSize", defaultValue = "5") Integer pageSize);
+
+    @RequestMapping(value = "findById")
+    Article findById(@RequestParam(name = "id") Integer id);
+
+    @RequestMapping(value = "/article/countQuantityOfArticle")
+    int countQuantityOfArticle(@RequestParam(name = "categoryId") Integer categoryId);
 }

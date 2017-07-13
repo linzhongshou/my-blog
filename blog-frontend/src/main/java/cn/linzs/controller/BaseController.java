@@ -60,11 +60,9 @@ public abstract class BaseController {
 			paramsMap.put(tempMap.get("name").toString(), tempMap.get("value"));
 		}
 		
-		int pageNum = paramsMap.get("iDisplayStart") != null ? Integer.valueOf(paramsMap.get("iDisplayStart").toString()) : 0;
-		int pageSize = paramsMap.get("iDisplayLength") != null ? Integer.valueOf(paramsMap.get("iDisplayLength").toString()) : 0;
-		pageNum = pageNum == 0 ? this.pageNum : pageNum;
-		pageSize = pageSize == 0 ? this.pageSize : pageSize;
-		
+		int pageNum = paramsMap.get("iDisplayStart") != null ? Integer.valueOf(paramsMap.get("iDisplayStart").toString()) : this.pageNum;
+		int pageSize = paramsMap.get("iDisplayLength") != null ? Integer.valueOf(paramsMap.get("iDisplayLength").toString()) : this.pageSize;
+
 		paramsMap.put("pageNum", pageNum);
 		paramsMap.put("pageSize", pageSize);
 		paramsMap.put("orderColumns", orderColumns);
@@ -87,14 +85,5 @@ public abstract class BaseController {
 
 		return dataMap;
 	}
-//	protected <T> Map<String, Object> buildTableData(Map<String, Object> paramsMap, Page<T> data) {
-//		Map<String, Object> dataMap = new HashMap<String, Object>();
-//		dataMap.put("sEcho", Integer.valueOf(paramsMap.get("sEcho").toString()));
-//		dataMap.put("iTotalRecords", data.getTotal());
-//		dataMap.put("iTotalDisplayRecords", data.getTotal());
-//		dataMap.put("aaData", data.getResult());
-//
-//		return dataMap;
-//	}
-	
+
 }

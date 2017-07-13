@@ -1,11 +1,14 @@
 package cn.linzs.controller;
 
 import cn.linzs.entity.Article;
+import cn.linzs.entity.Article;
 import cn.linzs.service.IArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -38,5 +41,19 @@ public class ArticleController extends BaseController {
 
         Map<String, Object> jsonMap = buildTableData(paramsMap, articlePage);
         return jsonMap;
+    }
+
+    @RequestMapping(value = "/toAddOrEdit")
+    public String toAddOrEdit(@RequestParam(name = "id", required = false) Integer id, Model model) {
+        Article article = null;
+
+        if(id == null) {
+            article = new Article();
+        } else {
+            article = articleService.findById(id);
+        }
+
+        model.addAttribute("article", article);
+        return "article/addOrEdit";
     }
 }

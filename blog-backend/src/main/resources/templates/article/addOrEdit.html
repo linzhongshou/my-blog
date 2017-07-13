@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="page_part :: head"></head>
+
+<body class="hold-transition login-page">
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title" th:if="${article.id eq null}">新增</h3>
+                    <h3 class="box-title" th:if="${article.id ne null}">编辑</h3>
+                </div>
+                <form id="articleForm" class="form-horizontal" onsubmit="submitForm(); return false;">
+                    <input type="hidden" id="id" name="id" th:value="${article.id}">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="title" class="col-md-1 control-label">标题</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="title" name="title" th:value="${article.title}" placeholder="文章标题">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="summary" class="col-md-1 control-label">摘要</label>
+
+                            <div class="col-md-6">
+                                <textarea id="summary" name="summary" rows="3" th:text="${article.summary}" style="width: 100%; resize: none;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">保存</button>
+                        <button type="button" class="btn btn-default" onclick="window.history.back()">返回</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+</section>
+
+<div th:include="page_part :: js"></div>
+<script th:src="@{/plugins/input-mask/jquery.inputmask.js}"></script>
+<script th:src="@{/plugins/input-mask/jquery.inputmask.regex.extensions.js}"></script>
+<script th:src="@{/js/utils/formUtil.js}"></script>
+<script th:inline="javascript">
+    $(function() {
+//        initInputMask();
+    });
+
+    function initInputMask() {
+        $("#sort").inputmask("Regex", { regex: "\\d{0,3}" });
+    }
+
+    function submitForm() {
+        var formData = $("#articleForm").serializeJson();
+        stringUtil.trimString(formData);
+
+        $.ajax({
+            url: /*[[@{saveCategory}]]*/,
+            type: 'POST',
+            data: formData,
+            success: function(obj) {
+                if(constants.PROCESS_RESULT_CODE.SUCCESS() == obj.code) {
+                    window.history.back();
+                } else {
+                    dialogUtil.alert( {'content': obj.resultData} );
+                }
+            },
+            error: function(xhr, err) {
+                dialogUtil.alert( {'content': '发生异常！'} );
+            }
+        });
+    }
+</script>
+</body>
+</html>

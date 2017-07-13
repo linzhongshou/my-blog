@@ -25,4 +25,14 @@ public class ArticleController {
                                   @RequestParam(name = "pageSize", defaultValue = "5") Integer pageSize) {
         return articleService.findPage(pageNum, pageSize);
     }
+
+    @RequestMapping(value = "findById")
+    public Article findById(@RequestParam(name = "id") Integer id) {
+        return articleService.findById(id);
+    }
+
+    @RequestMapping(value = "/countQuantityOfArticle")
+    public int countQuantityOfArticle(@RequestParam(name = "categoryId") Integer categoryId) {
+        return articleService.countByCategoryId(categoryId);
+    }
 }

@@ -37,6 +37,10 @@
 <script th:src="@{/js/utils/formUtil.js}"></script>
 <script th:inline="javascript">
     $(function() {
+        if(window != top) {
+            top.location.href = location.href;
+        }
+
         $("#account").focus();
     });
 
@@ -60,8 +64,6 @@
                 alert('has error!');
             }
         });
-
-        return false;
     }
 </script>
 </body>

@@ -10,13 +10,16 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">分类列表</h3>
+                    <div>
+                        <a th:href="@{toAddOrEdit}"><button class="btn btn-primary">新增分类</button></a>
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="articleTable" class="table table-bordered table-hover">
+                    <table id="categoryTable" class="table table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>名称分类</th>
+                            <th>分类名称</th>
                             <th>排序</th>
                             <th>创建时间</th>
                             <th>操作</th>
@@ -41,8 +44,8 @@
     var dataTable = null;
 
     $(function() {
-        dataTable = $("#articleTable").datatable({
-            "url": "/article/getArticlePage",
+        dataTable = $("#categoryTable").datatable({
+            "url": "/category/getCategoryPage",
             "columns": initColumn(),
             "search": getSearchData,
             "rowCallBack": rowCallBack
@@ -74,21 +77,41 @@
             nRow.bgColor = "#EDEDED";
         }
 
-        $('td:eq(1)', nRow).text(new Date(aData.createDate).pattern('yyyy-MM-dd HH:mm'));
+        $('td:eq(2)', nRow).text(new Date(aData.createDate).pattern('yyyy-MM-dd HH:mm'));
 
         var htmlText = buildOperate(aData);
-        $('td:eq(2)', nRow).html(htmlText);
+        $('td:eq(3)', nRow).html(htmlText);
 
         return nRow;
     }
 
     function buildOperate(aData) {
         var html = [];
-        html.push('<a href="">编辑</a>');
+        html.push('<a href="toAddOrEdit?id='+aData.id+'">编辑</a>');
         html.push('&nbsp;');
-        html.push('<a href="">删除</a>');
+        html.push('<a href="javascript:void(0);" onclick="del('+aData.id+')">删除</a>');
 
         return html.join('');
+    }
+
+    function del(id) {
+        dialogUtil.confirm( {'content': '是否删除！', confirm: function () {
+            $.ajax({
+                url: /*[[@{delete}]]*/,
+                type: 'POST',
+                data: { 'id': id },
+                success: function(obj) {
+                    if(constants.PROCESS_RESULT_CODE.SUCCESS() == obj.code) {
+                        dataTable.draw();
+                    } else {
+                        dialogUtil.alert( {'content': obj.resultData} );
+                    }
+                },
+                error: function(xhr, err) {
+                    dialogUtil.alert( {'content': '发生异常！'} );
+                }
+            });
+        }});
     }
 </script>
 </body>

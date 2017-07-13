@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface IArticleRepo extends PagingAndSortingRepository<Article, Integer> {
+
+    int countByCategoryId(Integer categoryId);
 }

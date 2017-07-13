@@ -24,4 +24,13 @@ public class ArticleService {
         Pageable pageable = new PageRequest(pageNum, pageSize);
         return articleRepo.findAll(pageable).getContent();
     }
+
+    public Article findById(Integer id) {
+        return articleRepo.findOne(id);
+    }
+
+    public int countByCategoryId(Integer categoryId) {
+        return articleRepo.countByCategoryId(categoryId);
+    }
+
 }
