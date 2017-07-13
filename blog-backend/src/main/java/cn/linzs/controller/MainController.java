@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainController {
 
-    @RequestMapping("/")
+    @RequestMapping(value = "/")
     public String toIndex() {
         return "index";
     }
 
-    @RequestMapping("/404")
+    @RequestMapping(value = "/404")
     public String to404() {
         return "common/404";
     }
 
-    @RequestMapping("/500")
+    @RequestMapping(value = "/500")
     public String to500() {
         return "common/500";
     }

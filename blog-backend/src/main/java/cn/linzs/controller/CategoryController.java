@@ -1,7 +1,7 @@
 package cn.linzs.controller;
 
-import cn.linzs.entity.Article;
-import cn.linzs.service.IArticleService;
+import cn.linzs.entity.Category;
+import cn.linzs.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,31 +12,31 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created By linzs on 7/12/17 5:21 PM
+ * Created By linzs on 7/13/17 10:43 AM
  */
 @Controller
-@RequestMapping("/article")
-public class ArticleController extends BaseController {
+@RequestMapping("/category")
+public class CategoryController extends BaseController {
 
     @Autowired
-    private IArticleService articleService;
+    private ICategoryService categoryService;
 
-    @RequestMapping(value = "/toArticle")
-    public String toArticle() {
-        return "article/list";
+    @RequestMapping(value = "/toCategory")
+    public String toCategory() {
+        return "category/list";
     }
 
-    @RequestMapping(value = "/getArticlePage")
+    @RequestMapping(value = "/getCategoryPage")
     @ResponseBody
-    public Map<String, Object> getArticlePage(@RequestBody Map<String, Object> requestMap) {
+    public Map<String, Object> getCategoryPage(@RequestBody Map<String, Object> requestMap) {
         Map<String, Object> paramsMap = parsePageMap(requestMap);
 
-        List<Article> articlePage = articleService.findPage(
+        List<Category> categoryPage = categoryService.findPage(
                 Integer.valueOf(paramsMap.get("pageNum").toString()),
                 Integer.valueOf(paramsMap.get("pageSize").toString())
         );
 
-        Map<String, Object> jsonMap = buildTableData(paramsMap, articlePage);
+        Map<String, Object> jsonMap = buildTableData(paramsMap, categoryPage);
         return jsonMap;
     }
 }

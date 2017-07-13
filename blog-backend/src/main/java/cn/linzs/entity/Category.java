@@ -9,6 +9,7 @@ public class Category extends BaseEntity {
 
     private Integer id;
     private String name;
+    private Integer sort;
     private Date createDate;
     private Date updateDate;
 
@@ -18,6 +19,14 @@ public class Category extends BaseEntity {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     public String getName() {

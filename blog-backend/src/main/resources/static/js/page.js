@@ -16,7 +16,7 @@
 	$.fn.datatable = function( options ) {
 		var dataTable = null;
 		var options_ = {
-			"id": "dataTable",
+			"id": $(this).attr("id"),
 			"url": "",
 			"pageSize": 10,
 			"search": null, // 获取搜索参数的回调函数
@@ -107,9 +107,9 @@
 		        "success": function(resp) {
 		            fnCallback(resp); //服务器端返回的对象的returnObject部分是要求的格式
 		        },
-		        "error": function(error) {
+		        "error": function(xhr, error) {
 		        	if(error.status == 500) {
-		        		bootstrapAlert("提示", "请求服务器发生错误，请联系管理员！", 400, null);
+		        		alert("请求服务器发生错误，请联系管理员！");
 		        		$("#dataTable_processing").hide();
 		        	}
 		        }

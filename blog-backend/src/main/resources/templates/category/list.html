@@ -9,20 +9,15 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">文章列表</h3>
+                    <h3 class="box-title">分类列表</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <table id="articleTable" class="table table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>标题</th>
-                            <th>阅读数</th>
-                            <th>评论数</th>
-                            <th>点赞数</th>
-                            <th>允许评论</th>
-                            <th>允许点赞</th>
-                            <th>是否发布</th>
+                            <th>名称分类</th>
+                            <th>排序</th>
                             <th>创建时间</th>
                             <th>操作</th>
                         </tr>
@@ -58,13 +53,8 @@
 
     function initColumn() {
         var columns =  [
-            {"mData": 'title'},
-            {"mData": 'readCount'},
-            {"mData": 'commentCount'},
-            {"mData": 'thumbupCount'},
-            {"mData": 'allowComment'},
-            {"mData": 'allowThumbup'},
-            {"mData": 'visible'},
+            {"mData": 'name'},
+            {"mData": 'sort'},
             {"mData": 'createDate'},
             {"mData": null}
         ]
@@ -84,26 +74,10 @@
             nRow.bgColor = "#EDEDED";
         }
 
-        if(aData.allowComment == 'y') {
-            $('td:eq(4)', nRow).text('是');
-        } else {
-            $('td:eq(4)', nRow).text('否');
-        }
-
-        if(aData.allowThumbup == 'y') {
-            $('td:eq(5)', nRow).text('是');
-        } else {
-            $('td:eq(5)', nRow).text('否');
-        }
-
-        if(aData.visible == 'y') {
-            $('td:eq(6)', nRow).text('是');
-        } else {
-            $('td:eq(6)', nRow).text('否');
-        }
+        $('td:eq(1)', nRow).text(new Date(aData.createDate).pattern('yyyy-MM-dd HH:mm'));
 
         var htmlText = buildOperate(aData);
-        $('td:eq(8)', nRow).html(htmlText);
+        $('td:eq(2)', nRow).html(htmlText);
 
         return nRow;
     }
