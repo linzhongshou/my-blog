@@ -32,6 +32,11 @@ public class CategoryService {
         return categoryRepo.findOne(id);
     }
 
+    public List<Category> findAll() {
+        Sort sort = new Sort(Sort.Direction.DESC, "sort");
+        return (List<Category>) categoryRepo.findAll(sort);
+    }
+
     public Category findByName(String name) {
         return categoryRepo.findByName(name);
     }

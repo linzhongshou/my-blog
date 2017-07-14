@@ -21,6 +21,9 @@ public interface ICategoryService {
     @RequestMapping(value = "/category/findById")
     Category findById(@RequestParam(name = "id") Integer id);
 
+    @RequestMapping(value = "/category/getAllCategory")
+    List<Category> getAllCategory();
+
     @RequestMapping(value = "/category/findByName")
     Category findByName(@RequestParam(name = "name") String name);
 

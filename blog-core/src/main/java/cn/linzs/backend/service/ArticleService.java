@@ -1,6 +1,7 @@
 package cn.linzs.backend.service;
 
 import cn.linzs.backend.entity.Article;
+import cn.linzs.backend.entity.Category;
 import cn.linzs.backend.repo.IArticleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -31,6 +32,14 @@ public class ArticleService {
 
     public int countByCategoryId(Integer categoryId) {
         return articleRepo.countByCategoryId(categoryId);
+    }
+
+    public Article save(Article article) {
+        return articleRepo.save(article);
+    }
+
+    public void delte(Integer id) {
+        articleRepo.delete(id);
     }
 
 }

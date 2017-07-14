@@ -4,9 +4,7 @@ import cn.linzs.backend.entity.Article;
 import cn.linzs.backend.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,7 +24,7 @@ public class ArticleController {
         return articleService.findPage(pageNum, pageSize);
     }
 
-    @RequestMapping(value = "findById")
+    @RequestMapping(value = "/findById")
     public Article findById(@RequestParam(name = "id") Integer id) {
         return articleService.findById(id);
     }
@@ -34,5 +32,15 @@ public class ArticleController {
     @RequestMapping(value = "/countQuantityOfArticle")
     public int countQuantityOfArticle(@RequestParam(name = "categoryId") Integer categoryId) {
         return articleService.countByCategoryId(categoryId);
+    }
+
+    @RequestMapping(value = "/saveArticle")
+    public Article saveArticle(@RequestBody Article article) {
+        return articleService.save(article);
+    }
+
+    @RequestMapping(value = "/delete")
+    public void delete(@RequestParam(name = "id") Integer id) {
+        articleService.delte(id);
     }
 }

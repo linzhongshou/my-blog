@@ -105,6 +105,8 @@
             $('td:eq(6)', nRow).text('否');
         }
 
+        $('td:eq(7)', nRow).text(new Date(aData.createDate).pattern('yyyy-MM-dd HH:mm'));
+
         var htmlText = buildOperate(aData);
         $('td:eq(8)', nRow).html(htmlText);
 

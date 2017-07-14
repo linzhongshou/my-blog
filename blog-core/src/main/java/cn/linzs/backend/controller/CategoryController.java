@@ -31,6 +31,11 @@ public class CategoryController {
         return categoryService.findById(id);
     }
 
+    @RequestMapping(value = "/getAllCategory")
+    public List<Category> getAllCategory() {
+        return categoryService.findAll();
+    }
+
     @RequestMapping(value = "/findByName")
     public Category findByName(@RequestParam(name = "name") String name) {
         return categoryService.findByName(name);
