@@ -1,7 +1,7 @@
-package cn.linzs.backend.controller;
+package cn.linzs.controller;
 
-import cn.linzs.backend.entity.Category;
-import cn.linzs.backend.service.CategoryService;
+import cn.linzs.entity.Category;
+import cn.linzs.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +21,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @RequestMapping(value = "/findPage")
-    public List<Category> findPage(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNum,
+    public List<Category> findPage(@RequestParam(name = "pageNum", defaultValue = "0") Integer pageNum,
                                    @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
         return categoryService.findPage(pageNum, pageSize);
     }

@@ -2,8 +2,11 @@ define(['vue'], function(Vue){
     //数据
     var data = {
         nav_list: [{
+            name: "主页",
+            url: "/www/index.html",
+        },{
             name: "关于我",
-            url: "/www/post.html",
+            url: "",
         }, {
             name: "留言板",
             url: ""
@@ -18,8 +21,9 @@ define(['vue'], function(Vue){
                                     <span class="icon-bar"></span>\
                                     <span class="icon-bar"></span>\
                                     <span class="icon-bar"></span>\
+                                    <span class="icon-bar"></span>\
                                 </button>\
-                                <a class="navbar-brand" href="#">Blog</a>\
+                                <a class="navbar-brand">Blog</a>\
                             </div>\
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">\
                                 <ul class="nav navbar-nav">\

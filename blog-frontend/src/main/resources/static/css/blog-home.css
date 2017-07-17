@@ -4,10 +4,17 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
-body {
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-}
+html, body, .main_container { height: 100%; }
+body { background-image: url(/images/back.jpg); }
+a:hover { text-decoration: none; }
 
-footer {
-    margin: 50px 0;
-}
+nav.navbar-inverse { background-color: #949494; border-color: #4a4a4a; }
+nav a { color: #4a4a4a !important; }
+nav a:hover { color: white !important; }
+.main_container { padding-top: 70px; background-color: white; }
+
+.post_box { border: 1px solid #e3e3e3; box-shadow: 1px 1px #e3e3e3; border-radius: 4px; background-color: #f5f5f5; margin-bottom: 20px; padding: 0px 5px; }
+.post_title { text-align: center; font-size: 20px; }
+.post_text { min-height: 40px; word-break:break-all; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; margin: 0px; }
+.post_footer { margin: 10px 0px 6px 0px; }
+.post_readmore { float: right; margin-right: 6px; }

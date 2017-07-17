@@ -1,7 +1,7 @@
-package cn.linzs.backend.service;
+package cn.linzs.service;
 
-import cn.linzs.backend.entity.User;
-import cn.linzs.backend.repo.IUserRepo;
+import cn.linzs.entity.User;
+import cn.linzs.repo.IUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -23,45 +23,36 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-	<style>
-        body { background-color: #3a3a3a; }
-        .post_box { border: 1px solid #bdbdbd; box-shadow: 3px 3px #bdbdbd; border-radius: 4px; background-color: #f5f5f5; margin-bottom: 20px; padding: 0px 5px; }
-        .post_title { width: 100%; position: relative; text-align: center; }
-        .post_text { word-break:break-all; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; margin: 10px 0px; }
-        .post_footer { margin: 20px 0px 6px 0px; }
-	</style>
 </head>
 
 <body>
     <!-- Navigation -->
     <div id="nav"><navigation></navigation></div>
-    <div><vue-page v-bind:pagedata="ajaxData"></vue-page></div>
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container main_container">
         <div class="row">
 
             <!-- Blog Entries Column -->
-            <div class="col-md-8" id="page">
+            <div class="col-md-8" id="page_container">
                 <!-- Blog Post -->
                 <div class="post_box" v-for="data in ajaxData">
                     <div class="row">
-                        <div class="post_title">
-                            <h2>
-                                <a href="#">{{ data.title }}</a>
-                            </h2>
-                        </div>
                         <div class="col-md-4">
                             <img class="img-responsive center-block" src="http://placehold.it/900x300" alt="img">
                         </div>
                         <div class="col-md-8">
-                            <p class="post_text">{{ data.content }}</p>
-                            <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                            <div class="post_title">
+                                <a href="javascript:void(0);" @click="toPostPage(data.id)">{{ data.title }}</a>
+                            </div>
+                            <p class="post_text">{{ data.summary }}</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12"><p class="post_footer"><span class="glyphicon glyphicon-time"></span>{{ data.date }}</p></div>
+                        <div class="col-md-12" style="margin: 5px;">
+                            <span class="post_footer"><span class="glyphicon glyphicon-time"></span>{{ data.createDate | formatDate }}</span>
+                            <a class="post_readmore" href="javascript:void(0);" @click="toPostPage(data.id)">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        </div>
                     </div>
                 </div>
                 <table id="dataTable" class="display" cellspacing="0" width="100%"></table>
@@ -85,44 +76,21 @@
                 </div>
 
                 <!-- Blog Categories Well -->
-                <div class="well">
-                    <h4>Blog Categories</h4>
+                <div class="well" id="category_container">
+                    <h4>文章分类</h4>
                     <div class="row">
                         <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
+                            <categoryComponent v-bind:categories="categories"></categoryComponent>
                         </div>
-                        <!-- /.col-lg-6 -->
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /.col-lg-6 -->
                     </div>
                     <!-- /.row -->
                 </div>
 
                 <!-- Side Widget Well -->
-                <div class="well">
-                    <h4>Side Widget Well</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
-                </div>
+                <!--<div class="well">-->
+                    <!--<h4>Side Widget Well</h4>-->
+                    <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>-->
+                <!--</div>-->
 
             </div>
 
@@ -130,22 +98,9 @@
         <!-- /.row -->
 
         <hr>
-
-        <!-- Footer -->
-        <!--<footer>-->
-            <!--<div class="row">-->
-                <!--<div class="col-lg-12">-->
-                    <!--<p>Copyright &copy; Your Website 2014</p>-->
-                <!--</div>-->
-                <!--&lt;!&ndash; /.col-lg-12 &ndash;&gt;-->
-            <!--</div>-->
-            <!--&lt;!&ndash; /.row &ndash;&gt;-->
-        <!--</footer>-->
-
     </div>
     <!-- /.container -->
 
-    <script src="//cdn.bootcss.com/require.js/2.2.0/require.min.js" data-main="/js/main.js"></script>
-    <script src="/js/index.js"></script>
+    <script src="//cdn.bootcss.com/require.js/2.2.0/require.min.js" data-main="/js/index"></script>
 </body>
 </html>

@@ -16,7 +16,7 @@
 	$.fn.datatable = function( options ) {
 		var dataTable = null;
 		var options_ = {
-			"id": "dataTable",
+			"id": $(this).attr("id"),
 			"url": "",
 			"pageSize": 10,
 			"search": null, // 获取搜索参数的回调函数
@@ -95,7 +95,7 @@
 			if(options_.search != null && typeof options_.search === "function") {
 				searchData = options_.search.call(); 
 			}
-			
+
 			var params = {
 				"pageData": pageData,
 				// 搜索条件框的值

@@ -1,27 +1,26 @@
-package cn.linzs.backend.controller;
+package cn.linzs.controller;
 
-import cn.linzs.backend.entity.Article;
-import cn.linzs.backend.service.ArticleService;
+import cn.linzs.entity.Article;
+import cn.linzs.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created By linzs on 7/13/17 9:24 AM
  */
 @RestController
 @RequestMapping("/article")
-public class ArticleController {
+public class ArticleController extends BaseController {
 
     @Autowired
     private ArticleService articleService;
 
     @RequestMapping(value = "/findPage")
-    public List<Article> findPage(@RequestParam(name = "pageNum", defaultValue = "0") Integer pageNum,
-                                  @RequestParam(name = "pageSize", defaultValue = "5") Integer pageSize) {
-        return articleService.findPage(pageNum, pageSize);
+    public List<Article> findPage(@RequestBody Map<String, Object> requestMap) {
+        return articleService.findPage(requestMap);
     }
 
     @RequestMapping(value = "/findById")

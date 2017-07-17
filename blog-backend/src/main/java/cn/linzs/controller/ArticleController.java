@@ -37,12 +37,7 @@ public class ArticleController extends BaseController {
     @ResponseBody
     public Map<String, Object> getArticlePage(@RequestBody Map<String, Object> requestMap) {
         Map<String, Object> paramsMap = parsePageMap(requestMap);
-
-        List<Article> articlePage = articleService.findPage(
-                Integer.valueOf(paramsMap.get("pageNum").toString()),
-                Integer.valueOf(paramsMap.get("pageSize").toString())
-        );
-
+        List<Article> articlePage = articleService.findPage(paramsMap);
         Map<String, Object> jsonMap = buildTableData(paramsMap, articlePage);
         return jsonMap;
     }

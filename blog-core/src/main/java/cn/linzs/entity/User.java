@@ -1,6 +1,4 @@
-package cn.linzs.backend.entity;
-
-import com.fasterxml.jackson.databind.ser.Serializers;
+package cn.linzs.entity;
 
 import javax.persistence.*;
 

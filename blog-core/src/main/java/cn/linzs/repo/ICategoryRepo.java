@@ -1,6 +1,6 @@
-package cn.linzs.backend.repo;
+package cn.linzs.repo;
 
-import cn.linzs.backend.entity.Category;
+import cn.linzs.entity.Category;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**

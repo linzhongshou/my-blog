@@ -63,6 +63,9 @@ public abstract class BaseController {
 		int pageNum = paramsMap.get("iDisplayStart") != null ? Integer.valueOf(paramsMap.get("iDisplayStart").toString()) : this.pageNum;
 		int pageSize = paramsMap.get("iDisplayLength") != null ? Integer.valueOf(paramsMap.get("iDisplayLength").toString()) : this.pageSize;
 
+		pageNum = pageNum == 0 ? this.pageNum : pageNum;
+		pageSize = pageSize == 0 ? this.pageSize : pageSize;
+
 		paramsMap.put("pageNum", pageNum);
 		paramsMap.put("pageSize", pageSize);
 		paramsMap.put("orderColumns", orderColumns);

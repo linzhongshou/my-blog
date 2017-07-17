@@ -1,9 +1,11 @@
 package cn.linzs.controller;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import cn.linzs.entity.Article;
+import cn.linzs.entity.Category;
+import cn.linzs.service.IArticleService;
+import cn.linzs.service.ICategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -14,26 +16,26 @@ import java.util.*;
 @RequestMapping("/blog")
 public class BlogController extends BaseController {
 
-    @RequestMapping("/page")
+    @Autowired
+    private IArticleService articleService;
+    @Autowired
+    private ICategoryService categoryService;
+
+    @RequestMapping(value = "/page")
     public Map<String, Object> page(@RequestBody Map<String, Object> requestMap) {
-        List<Map<String, Object>> page = new ArrayList<>();
-        for(int i=1; i <= 10; i++) {
-            Map<String, Object> data = new HashMap<>();
-            data.put("id", i);
-            data.put("title", "a" + i);
-            data.put("content", UUID.randomUUID().toString());
-            data.put("date", new Date());
-
-            page.add(data);
-        }
-
         Map<String, Object> paramsMap = parsePageMap(requestMap);
-
-//        Page<SysUser> page = userService.findByPage(paramsMap,
-//                Integer.valueOf(paramsMap.get("pageNum").toString()),
-//                Integer.valueOf(paramsMap.get("pageSize").toString()));
-
-        Map<String, Object> jsonMap = buildTableData(paramsMap, page);
+        List<Article> articlePage = articleService.findPage(paramsMap);
+        Map<String, Object> jsonMap = buildTableData(paramsMap, articlePage);
         return jsonMap;
+    }
+
+    @RequestMapping(value = "/getCategories", method = RequestMethod.GET)
+    public List<Category> getCategories() {
+        return categoryService.getAllCategory();
+    }
+
+    @RequestMapping(value = "/getPost", method = RequestMethod.GET)
+    public Article getPost(@RequestParam(name = "id") Integer id) {
+        return  articleService.findById(id);
     }
 }

@@ -1,6 +1,6 @@
-package cn.linzs.backend.repo;
+package cn.linzs.repo;
 
-import cn.linzs.backend.entity.User;
+import cn.linzs.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

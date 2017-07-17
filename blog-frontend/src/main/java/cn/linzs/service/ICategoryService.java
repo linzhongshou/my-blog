@@ -16,7 +16,7 @@ public interface ICategoryService {
 
     @RequestMapping(value = "/category/findPage")
     List<Category> findPage(@RequestParam(name = "pageNum", defaultValue = "0") Integer pageNum,
-                                   @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize);
+                            @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize);
 
     @RequestMapping(value = "/category/findById")
     Category findById(@RequestParam(name = "id") Integer id);

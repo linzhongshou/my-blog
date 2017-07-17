@@ -1,17 +1,12 @@
-package cn.linzs.backend.entity;
+package cn.linzs.entity;
 
-import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created By linzs on 7/12/17 11:46 AM
  */
-@Entity
-@Table(name = "t_category")
 public class Category extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
     private Integer sort;

@@ -1,7 +1,7 @@
-package cn.linzs.backend.controller;
+package cn.linzs.controller;
 
-import cn.linzs.backend.entity.User;
-import cn.linzs.backend.service.UserService;
+import cn.linzs.entity.User;
+import cn.linzs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

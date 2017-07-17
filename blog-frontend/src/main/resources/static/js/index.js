@@ -3,8 +3,8 @@ require.config({
         "jq_datatables": "/plugins/DataTables-1.10.15/media/js/jquery.dataTables.min",
         "bootstrap_datatables": "/plugins/DataTables-1.10.15/media/js/dataTables.bootstrap.min",
         "page": "/js/page",
-        "vue": "vue/vue.min",
-        "vuePage": "/js/components/vuePage"
+        "categorycomponent": "components/category",
+        "requestUtil": "utils/requestUtil"
     },
 
     shim: {
@@ -19,31 +19,80 @@ require.config({
     }
 });
 
-require(['page', 'vue', 'vuePage'], function(page, Vue, vuePage) {
-    var dataTable = null;
+require(['main'], function() {
+    require(['page', 'vue', 'categorycomponent', 'stringUtil', 'dateUtil', 'requestUtil'], function(page, Vue, categorycomponent, stringUtil, dateUtil, requestUtil) {
+        var dataTable = null;
 
-    $(function() {
-        dataTable = $("#dataTable").datatable({
-            "id": "dataTable",
-            "url": "/blog/page",
-            "columns": initColumn(),
-            "ajaxCallBack": ajaxCallBack
+        $(function() {
+            initPost();
+            initCategory();
         });
-    });
 
-    function initColumn() {
-        return [ { data: null } ];
-    }
+        function initPost() {
+            dataTable = $("#dataTable").datatable({
+                "url": "/blog/page",
+                "columns": initColumn(),
+                "search": searchParams,
+                "ajaxCallBack": ajaxCallBack
+            });
+        }
 
-    function ajaxCallBack(ajaxData) {
-        new Vue({
-            el: '#page',
-            data: {
-                ajaxData: ajaxData.aaData
-            },
-            components: {
-                vuePage: vuePage
+        function initColumn() {
+            return [ { data: null } ];
+        }
+
+        function searchParams() {
+            var params = {};
+            var requestParams = requestUtil.getRequestParameters();
+            if(!stringUtil.isNull(requestParams.categoryId)) {
+                params['categoryId'] = requestParams.categoryId;
             }
-        });
-    }
+            return params;
+        }
+
+        function ajaxCallBack(ajaxData) {
+            new Vue({
+                el: '#page_container',
+                data: {
+                    ajaxData: ajaxData.aaData
+                },
+                methods: {
+                    toPostPage: function(id) {
+                        window.open('/www/post.html?id=' + id);
+                    }
+                },
+                filters: {
+                    formatDate: function(time) {
+                        if(!stringUtil.isNull(time)) {
+                            return new Date(time).pattern('yyyy-MM-dd HH:mm');
+                        } else {
+                            return '';
+                        }
+                    }
+                }
+            });
+        }
+
+
+        function initCategory() {
+            $.ajax({
+                url: '/blog/getCategories',
+                type: 'GET',
+                success: function(categories) {
+                    if(!stringUtil.isNull(categories)) {
+                        new Vue({
+                            el: '#category_container',
+                            data: {
+                                categories: categories
+                            },
+                            components: {
+                                categorycomponent: categorycomponent
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+    });
 });

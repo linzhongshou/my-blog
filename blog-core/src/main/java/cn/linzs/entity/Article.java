@@ -1,4 +1,4 @@
-package cn.linzs.backend.entity;
+package cn.linzs.entity;
 
 import javax.persistence.*;
 import java.util.Date;

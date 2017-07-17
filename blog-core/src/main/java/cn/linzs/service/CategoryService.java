@@ -1,8 +1,7 @@
-package cn.linzs.backend.service;
+package cn.linzs.service;
 
-import cn.linzs.backend.entity.Category;
-import cn.linzs.backend.repo.ICategoryRepo;
-import org.hibernate.criterion.Order;
+import cn.linzs.entity.Category;
+import cn.linzs.repo.ICategoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
